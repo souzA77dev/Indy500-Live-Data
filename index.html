@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Live Grid</title>
+
+<style>
+:root {
+  --bg: #0c0c0c;
+  --row: #141414;
+  --row-hover: #1d1d1d;
+  --header: #101010;
+  --border: #2a2a2a;
+  --red: #c40000;
+  --text: #e6e6e6;
+  --muted: #a0a0a0;
+  --highlight: #ffd700;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+}
+
+header {
+  background: var(--header);
+  border-bottom: 3px solid var(--red);
+  padding: 14px 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1100px;
+}
+
+thead th {
+  background: var(--header);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr {
+  background: var(--row);
+  transition: background 0.15s;
+}
+
+tbody tr:hover {
+  background: var(--row-hover);
+}
+
+td {
+  padding: 10px 6px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  white-space: nowrap;
+}
+
+td.left {
+  text-align: left;
+}
+
+td.pos {
+  font-weight: bold;
+}
+
+td.avg {
+  font-weight: bold;
+  color: var(--highlight);
+}
+
+.car {
+  color: var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>LIVE GRID</h1>
+</header>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>P</th>
+      <th>N</th>
+      <th>NOME</th>
+      <th>EQUIPE</th>
+      <th>VOLTA 1</th>
+      <th>VOLTA 2</th>
+      <th>VOLTA 3</th>
+      <th>VOLTA 4</th>
+      <th>MÉDIA FINAL</th>
+    </tr>
+  </thead>
+  <tbody id="grid"></tbody>
+</table>
+</div>
+
+<script>
+const dados = [
+  {
+    pos: 1,
+    car: 30,
+    pilot: "TAKUMA SATO",
+    team: "RAHAL LETTERMAN LANIGAN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 2,
+    car: 83,
+    pilot: "ROBERT SHWARTZMAN",
+    team: "PREMA RACING", 
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 3,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 4,
+    car: 2,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 5,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 6,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 7,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 8,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 9,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 10,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 11,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 12,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 13,
+    car: 30,
+    pilot: "TAKUMA SATO",
+    team: "RAHAL LETTERMAN LANIGAN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 14,
+    car: 83,
+    pilot: "ROBERT SHWARTZMAN",
+    team: "PREMA RACING", 
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 15,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 16,
+    car: 2,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 17,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 18,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 19,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 20,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 21,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 22,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 23,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 24,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 25,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 26,
+    car: 2,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 27,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 28,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 29,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 30,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 31,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 32,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  },
+  {
+    pos: 33,
+    car: 5,
+    pilot: "PATO O'WARD",
+    team: "ARROW McLAREN",
+    laps: ["", "", "", ""]
+  }
+];
+
+function toSeconds(t) {
+  const [m, s] = t.split(":");
+  return (+m * 60) + parseFloat(s);
+}
+
+function fromSeconds(sec) {
+  const m = Math.floor(sec / 60);
+  const r = (sec % 60).toFixed(3);
+  return String(m).padStart(2, "0") + ":" + r.padStart(6, "0");
+}
+
+const tbody = document.getElementById("grid");
+
+dados.forEach(d => {
+  const total = d.laps.reduce((a, l) => a + toSeconds(l), 0);
+  const avg = fromSeconds(total / d.laps.length);
+
+  tbody.innerHTML += `
+    <tr>
+      <td class="pos">${d.pos}</td>
+      <td class="car">${d.car}</td>
+      <td class="left">${d.pilot}</td>
+      <td class="left">${d.team}</td>
+      ${d.laps.map(l => `<td>${l}</td>`).join("")}
+      <td class="avg">${avg}</td>
+    </tr>
+  `;
+});
+</script>
+
+</body>
+</html>
