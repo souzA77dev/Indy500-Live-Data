@@ -367,18 +367,21 @@ function fromSeconds(sec) {
   return String(m).padStart(2, "0") + ":" + r.padStart(6, "0");
 }
 
-// calcula média e guarda
-dados.forEach(d => {
-  const tempos = d.laps.map(toSeconds).filter(t => t !== null);
-  if (tempos.length === 4) {
-    d.avgSeconds = tempos.reduce((a, b) => a + b, 0) / 4;
-    d.avgFormatted = fromSeconds(d.avgSeconds);
-  } else {
-    d.avgSeconds = null;
-    d.avgFormatted = "--";
-  }
-
 const tbody = document.getElementById("grid");
+tbody.innerHTML = "";
+
+dados.forEach((d, index) => {
+  tbody.innerHTML += `
+    <tr>
+      <td class="pos">${index + 1}</td>
+      <td class="car">${d.car}</td>
+      <td class="left">${d.pilot}</td>
+      <td class="left">${d.team}</td>
+      ${d.laps.map(l => `<td>${l || "--"}</td>`).join("")}
+      <td class="avg">${d.avgFormatted}</td>
+    </tr>
+  `;
+});
 
 dados.forEach(d => {
 
@@ -414,6 +417,7 @@ dados.forEach(d => {
 
 </body>
 </html>
+
 
 
 
