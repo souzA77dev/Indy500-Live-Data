@@ -392,11 +392,18 @@ dados.forEach(d => {
       <td class="avg">${avg}</td>
     </tr>
   `;
+  ]
+
+  dados.sort((a, b) => {
+  if (a.avgSeconds === null) return 1;
+  if (b.avgSeconds === null) return -1;
+  return a.avgSeconds - b.avgSeconds;
 });
 </script>
 
 </body>
 </html>
+
 
 
 
