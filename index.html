@@ -17,9 +17,7 @@
   --highlight: #ffd700;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -40,9 +38,7 @@ header h1 {
   letter-spacing: 1px;
 }
 
-.table-wrap {
-  overflow-x: auto;
-}
+.table-wrap { overflow-x: auto; }
 
 table {
   width: 100%;
@@ -64,9 +60,7 @@ tbody tr {
   transition: background 0.15s;
 }
 
-tbody tr:hover {
-  background: var(--row-hover);
-}
+tbody tr:hover { background: var(--row-hover); }
 
 td {
   padding: 10px 6px;
@@ -76,22 +70,10 @@ td {
   white-space: nowrap;
 }
 
-td.left {
-  text-align: left;
-}
-
-td.pos {
-  font-weight: bold;
-}
-
-td.avg {
-  font-weight: bold;
-  color: var(--highlight);
-}
-
-.car {
-  color: var(--muted);
-}
+td.left { text-align: left; }
+td.pos { font-weight: bold; }
+td.avg { font-weight: bold; color: var(--highlight); }
+.car { color: var(--muted); }
 </style>
 </head>
 
@@ -122,237 +104,39 @@ td.avg {
 
 <script>
 const dados = [
-  {
-    pos: 1,
-    car: 7,
-    pilot: "Tiago Souza",
-    team: "Arrow Mclaren SPM",
-    laps: ["0:42,863", "0:42,708", "0:42,707", "0:42,711"]
-  },
-  {
-    pos: 2,
-    car: 17,
-    pilot: "Skyline",
-    team: "Arrow Mclaren SPM", 
-    laps: ["0:43,052", "0:42,816", "0:42,856", "0:50,000"]
-  },
-  {
-    pos: 3,
-    car: 1,
-    pilot: "Yugi",
-    team: "Arrow Mclaren SPM",
-    laps: ["0:42,856", "0:43,098", "0:42,968", "0:50,000"]
-  },
-  {
-    pos: 4,
-    car: 13,
-    pilot: "Luiz Costa",
-    team: "Arrow Mclaren SPM",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 5,
-    car: 31,
-    pilot: "Miss Circle",
-    team: "Chip Ganassi Racing Teams",
-    laps: ["0:43,227", "0:42,875", "0:42,741", "0:42,958"]
-  },
-  {
-    pos: 6,
-    car: 93,
-    pilot: "Karin",
-    team: "Chip Ganassi Racing Teams",
-    laps: ["0:42,926", "0:42,763", "0:42,702", "0:42,694"]
-  },
-  {
-    pos: 7,
-    car: 48,
-    pilot: "Vitor Henrique",
-    team: "Juncos Racing",
-    laps: ["0:43,447", "0:42,998", "0:42,843", "0:42,846"]
-  },
-  {
-    pos: 8,
-    car: 26,
-    pilot: "Kudoeste",
-    team: "Andretti Autosport",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 9,
-    car: 29,
-    pilot: "Mosquito",
-    team: "Chip Ganassi Racing Teams",
-    laps: ["0:43,752", "0:43,641", "0:43,604", "0:43,863"]
-  },
-  {
-    pos: 10,
-    car: 40,
-    pilot: "Cris Oliveira",
-    team: "Dale Coyne with Vasser Sullivan",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 11,
-    car: 76,
-    pilot: "Nikolas",
-    team: "Andretti Autosport",
-    laps: ["0:43,408", "0:43,196", "0:43,191", "0:43,178"]
-  },
-  {
-    pos: 12,
-    car: 75,
-    pilot: "Ranniel Pereira",
-    team: "DragonSpeed",
-    laps: ["0:43,237", "0:43,187", "0:43,002", "0:43,110"]
-  },
-  {
-    pos: 13,
-    car: 55,
-    pilot: "Peter Saline",
-    team: "Dale Coyne Team Goh",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 14,
-    car: 67,
-    pilot: "Renan Farias",
-    team: "Team Penske", 
-    laps: ["0:42,952", "0:42,686", "0:42,677", "0:42,713"]
-  },
-  {
-    pos: 15,
-    car: 16,
-    pilot: "Celso Silva",
-    team: "Andretti Autosport",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 16,
-    car: 78,
-    pilot: "Manelzinx",
-    team: "AJ Foyt Racing",
-    laps: ["0:43,610", "0:43,475", "0:43,569", "0:45,333"]
-  },
-  {
-    pos: 17,
-    car: 99,
-    pilot: "Oliveira King",
-    team: "AJ Foyt Racing",
-    laps: ["0:43,267", "0:42,876", "0:42,925", "0:42,862"]
-  },
-  {
-    pos: 18,
-    car: 59,
-    pilot: "Gabriel Pedra",
-    team: "Carlin",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 19,
-    car: 15,
-    pilot: "Felps",
-    team: "Ed Carpenter Racing",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 20,
-    car: 69,
-    pilot: "Pampam",
-    team: "Andretti Autosport",
-    laps: ["0:43,589", "0:43,867", "0:43,656", "0:44,154"]
-  },
-  {
-    pos: 21,
-    car: 19,
-    pilot: "Eduardo Bermudez",
-    team: "Citrone Buhl RLL",
-    laps: ["0:43,267", "0:42,876", "0:42,925", "0:42,862"]
-  },
-  {
-    pos: 22,
-    car: 97,
-    pilot: "Gabriel Moreira",
-    team: "Carlin",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 23,
-    car: 65,
-    pilot: "Enty",
-    team: "Rahal Letterman Lanigan",
-    laps: ["0:43,071", "0:42,954", "0:42,939", "0:42,928"]
-  },
-  {
-    pos: 24,
-    car: 79,
-    pilot: "Juan Pablo Espinosa",
-    team: "Rahal Letterman Lanigan",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 25,
-    car: 56,
-    pilot: "Vitor Schmitz",
-    team: "Team Penske",
-    laps: ["0:42,949", "0:42,724", "0:42,667", "0:42,653"]
-  },
-  {
-    pos: 26,
-    car: 91,
-    pilot: "Sea MissXyz",
-    team: "AJ Foyt Racing",
-    laps: ["0:43,317", "0:43,152", "0:43,016", "0:43,201"]
-  },
-  {
-    pos: 27,
-    car: 88,
-    pilot: "BlankCamper",
-    team: "Andretti Harding Steinbrenner Racing",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 28,
-    car: 8,
-    pilot: "Allan Jeferson",
-    team: "Meyer-Shank Racing",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 29,
-    car: 98,
-    pilot: "Otávio Marinho",
-    team: "Marco Andretti - Herta Autosport",
-    laps: ["0:42,786", "0:42,683", "0:42,750", "0:50,000"]
-  },
-  {
-    pos: 30,
-    car: 70,
-    pilot: "Joseph",
-    team: "Ed Carpenter Racing",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 31,
-    car: 33,
-    pilot: "Gabriel",
-    team: "Team Penske",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 32,
-    car: 84,
-    pilot: "Lucas Taraciuk",
-    team: "Dreyer Reinbold Racing",
-    laps: ["", "", "", ""]
-  },
-  {
-    pos: 33,
-    car: 37,
-    pilot: "Vitor Borges",
-    team: "Team Penske",
-    laps: ["0:43,033", "0:42,819", "0:42,753", "0:42,797"]
-  }
+  { car: 7, pilot: "Tiago Souza", team: "Arrow Mclaren SPM", laps: ["0:42,863","0:42,708","0:42,707","0:42,711"] },
+  { car: 17, pilot: "Skyline", team: "Arrow Mclaren SPM", laps: ["0:43,052","0:42,816","0:42,856","0:50,000"] },
+  { car: 1, pilot: "Yugi", team: "Arrow Mclaren SPM", laps: ["0:42,856","0:43,098","0:42,968","0:50,000"] },
+  { car: 13, pilot: "Luiz Costa", team: "Arrow Mclaren SPM", laps: ["","","",""] },
+  { car: 31, pilot: "Miss Circle", team: "Chip Ganassi Racing Teams", laps: ["0:43,227","0:42,875","0:42,741","0:42,958"] },
+  { car: 93, pilot: "Karin", team: "Chip Ganassi Racing Teams", laps: ["0:42,926","0:42,763","0:42,702","0:42,694"] },
+  { car: 48, pilot: "Vitor Henrique", team: "Juncos Racing", laps: ["0:43,447","0:42,998","0:42,843","0:42,846"] },
+  { car: 26, pilot: "Kudoeste", team: "Andretti Autosport", laps: ["","","",""] },
+  { car: 29, pilot: "Mosquito", team: "Chip Ganassi Racing Teams", laps: ["0:43,752","0:43,641","0:43,604","0:43,863"] },
+  { car: 40, pilot: "Cris Oliveira", team: "Dale Coyne with Vasser Sullivan", laps: ["","","",""] },
+  { car: 76, pilot: "Nikolas", team: "Andretti Autosport", laps: ["0:43,408","0:43,196","0:43,191","0:43,178"] },
+  { car: 75, pilot: "Ranniel Pereira", team: "DragonSpeed", laps: ["0:43,237","0:43,187","0:43,002","0:43,110"] },
+  { car: 55, pilot: "Peter Saline", team: "Dale Coyne Team Goh", laps: ["","","",""] },
+  { car: 67, pilot: "Renan Farias", team: "Team Penske", laps: ["0:42,952","0:42,686","0:42,677","0:42,713"] },
+  { car: 16, pilot: "Celso Silva", team: "Andretti Autosport", laps: ["","","",""] },
+  { car: 78, pilot: "Manelzinx", team: "AJ Foyt Racing", laps: ["0:43,610","0:43,475","0:43,569","0:45,333"] },
+  { car: 99, pilot: "Oliveira King", team: "AJ Foyt Racing", laps: ["0:43,267","0:42,876","0:42,925","0:42,862"] },
+  { car: 59, pilot: "Gabriel Pedra", team: "Carlin", laps: ["","","",""] },
+  { car: 15, pilot: "Felps", team: "Ed Carpenter Racing", laps: ["","","",""] },
+  { car: 69, pilot: "Pampam", team: "Andretti Autosport", laps: ["0:43,589","0:43,867","0:43,656","0:44,154"] },
+  { car: 19, pilot: "Eduardo Bermudez", team: "Citrone Buhl RLL", laps: ["0:43,267","0:42,876","0:42,925","0:42,862"] },
+  { car: 97, pilot: "Gabriel Moreira", team: "Carlin", laps: ["","","",""] },
+  { car: 65, pilot: "Enty", team: "Rahal Letterman Lanigan", laps: ["0:43,071","0:42,954","0:42,939","0:42,928"] },
+  { car: 79, pilot: "Juan Pablo Espinosa", team: "Rahal Letterman Lanigan", laps: ["","","",""] },
+  { car: 56, pilot: "Vitor Schmitz", team: "Team Penske", laps: ["0:42,949","0:42,724","0:42,667","0:42,653"] },
+  { car: 91, pilot: "Sea MissXyz", team: "AJ Foyt Racing", laps: ["0:43,317","0:43,152","0:43,016","0:43,201"] },
+  { car: 88, pilot: "BlankCamper", team: "Andretti Harding Steinbrenner Racing", laps: ["","","",""] },
+  { car: 8, pilot: "Allan Jeferson", team: "Meyer-Shank Racing", laps: ["","","",""] },
+  { car: 98, pilot: "Otávio Marinho", team: "Marco Andretti - Herta Autosport", laps: ["0:42,786","0:42,683","0:42,750","0:50,000"] },
+  { car: 70, pilot: "Joseph", team: "Ed Carpenter Racing", laps: ["","","",""] },
+  { car: 33, pilot: "Gabriel", team: "Team Penske", laps: ["","","",""] },
+  { car: 84, pilot: "Lucas Taraciuk", team: "Dreyer Reinbold Racing", laps: ["","","",""] },
+  { car: 37, pilot: "Vitor Borges", team: "Team Penske", laps: ["0:43,033","0:42,819","0:42,753","0:42,797"] }
 ];
 
 function toSeconds(t) {
@@ -367,70 +151,42 @@ function fromSeconds(sec) {
   return String(m).padStart(2, "0") + ":" + r.padStart(6, "0");
 }
 
-const tbody = document.getElementById("grid");
-tbody.innerHTML = "";
-
-dados.forEach((d, index) => {
-  tbody.innerHTML += `
-    <tr>
-      <td class="pos">${index + 1}</td>
-      <td class="car">${d.car}</td>
-      <td class="left">${d.pilot}</td>
-      <td class="left">${d.team}</td>
-      ${d.laps.map(l => `<td>${l || "--"}</td>`).join("")}
-      <td class="avg">${d.avgFormatted}</td>
-    </tr>
-  `;
+// calcular médias
+dados.forEach(d => {
+  const tempos = d.laps.map(toSeconds).filter(t => t !== null);
+  if (tempos.length === 4) {
+    d.avgSeconds = tempos.reduce((a,b)=>a+b,0) / 4;
+    d.avgFormatted = fromSeconds(d.avgSeconds);
+  } else {
+    d.avgSeconds = null;
+    d.avgFormatted = "--";
+  }
 });
 
-dados.forEach(d => {
-
-  const tempos = d.laps
-    .map(toSeconds)
-    .filter(t => t !== null);
-
-  let avg = "--";
-
-  if (tempos.length === 4) {
-    const total = tempos.reduce((a, b) => a + b, 0);
-    avg = fromSeconds(total / 4);
-  }
-
-  tbody.innerHTML += `
-    <tr>
-      <td class="pos">${d.pos}</td>
-      <td class="car">${d.car}</td>
-      <td class="left">${d.pilot}</td>
-      <td class="left">${d.team}</td>
-      ${d.laps.map(l => `<td>${l || "--"}</td>`).join("")}
-      <td class="avg">${avg}</td>
-    </tr>
-  `;
-  ]
-
-  dados.sort((a, b) => {
+// ordenar por média
+dados.sort((a,b)=>{
   if (a.avgSeconds === null) return 1;
   if (b.avgSeconds === null) return -1;
   return a.avgSeconds - b.avgSeconds;
+});
+
+// renderizar
+const tbody = document.getElementById("grid");
+tbody.innerHTML = "";
+
+dados.forEach((d,i)=>{
+  tbody.innerHTML += `
+    <tr>
+      <td class="pos">${i+1}</td>
+      <td class="car">${d.car}</td>
+      <td class="left">${d.pilot}</td>
+      <td class="left">${d.team}</td>
+      ${d.laps.map(l=>`<td>${l || "--"}</td>`).join("")}
+      <td class="avg">${d.avgFormatted}</td>
+    </tr>
+  `;
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
