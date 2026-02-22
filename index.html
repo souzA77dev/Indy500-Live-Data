@@ -356,10 +356,11 @@ const dados = [
 ];
 
 function toSeconds(t) {
+  if (!t) return null;
   const [m, s] = t.split(":");
-  return (+m * 60) + parseFloat(s);
+  return (+m * 60) + parseFloat(s.replace(",", "."));
 }
-
+  
 function fromSeconds(sec) {
   const m = Math.floor(sec / 60);
   const r = (sec % 60).toFixed(3);
@@ -369,8 +370,17 @@ function fromSeconds(sec) {
 const tbody = document.getElementById("grid");
 
 dados.forEach(d => {
-  const total = d.laps.reduce((a, l) => a + toSeconds(l), 0);
-  const avg = fromSeconds(total / d.laps.length);
+
+  const tempos = d.laps
+    .map(toSeconds)
+    .filter(t => t !== null);
+
+  let avg = "--";
+
+  if (tempos.length === 4) {
+    const total = tempos.reduce((a, b) => a + b, 0);
+    avg = fromSeconds(total / 4);
+  }
 
   tbody.innerHTML += `
     <tr>
@@ -378,7 +388,7 @@ dados.forEach(d => {
       <td class="car">${d.car}</td>
       <td class="left">${d.pilot}</td>
       <td class="left">${d.team}</td>
-      ${d.laps.map(l => `<td>${l}</td>`).join("")}
+      ${d.laps.map(l => `<td>${l || "--"}</td>`).join("")}
       <td class="avg">${avg}</td>
     </tr>
   `;
@@ -387,6 +397,7 @@ dados.forEach(d => {
 
 </body>
 </html>
+
 
 
 
